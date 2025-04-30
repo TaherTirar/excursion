@@ -139,6 +139,12 @@
             overflow: hidden;
             z-index: 1;
         }
+
+        /* Custom pagination styles */
+        .pagination a.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
     @stack('styles')
 </head>
@@ -436,10 +442,10 @@
                         <div class="footer-social-icons">
                             <h5>Suivez nous:</h5>
                             <ul>
-                                <li><a href="#"><i class="bx bxl-facebook"></i></a></li>
-                                <li><a href="#"><i class="bx bxl-instagram"></i></a></li>
-                                <li><a href="#"><i class="bx bxl-twitter"></i></a></li>
-                                <li><a href="#"><i class="bx bxl-dribbble"></i></a></li>
+                                <li><a href="https://www.facebook.com/tahertirar/" target="_blank"><i class="bx bxl-facebook"></i></a></li>
+                                <li><a href="https://www.instagram.com/tahertirar/" target="_blank"><i class="bx bxl-instagram"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/tirarmohamedtaher/" target="_blank"><i class="bx bxl-linkedin"></i></a></li>
+                                <li><a href="https://wa.me/0675453709" target="_blank"><i class="bx bxl-whatsapp"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -450,14 +456,14 @@
                             <div class="footer-links">
                                 <h5 class="widget-title">Contactez nous</h5>
                                 <div class="contact-box">
-                                    <span><i class="bx bx-phone"></i></span>
+                                    <span><i class="bx bx-phone">nos téléphonée</i></span>
                                     <div>
                                         <a href="tel:+01852-1265122">{{ setting('site.phone') }}</a>
                                         <a href="tel:+01852-1265122">{{ setting('site.phone') }}</a>
                                     </div>
                                 </div>
                                 <div class="contact-box">
-                                    <span><i class="bx bx-mail-send"></i></span>
+                                    <span><i class="bx bx-mail-send">nos emails</i></span>
                                     <div>
                                         <a
                                             href="https://demo.egenslab.com/cdn-cgi/l/email-protection#5b32353d341b3e233a362b373e75383436"><span
@@ -470,7 +476,7 @@
                                     </div>
                                 </div>
                                 <div class="contact-box">
-                                    <span><i class="bx bx-location-plus"></i></span>
+                                    <span><i class="bx bx-location-plus">nos adresses</i></span>
                                     <div>
                                         <a href="#">{{ setting('site.Adresse') }}</a>
                                     </div>

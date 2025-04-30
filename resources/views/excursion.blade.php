@@ -27,7 +27,7 @@
                     <div class="row mb-30">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="package-filter">
-                                <h5>Afficher 1-5 de {{ count($services) }} resultats</h5>
+                                <h5>Afficher {{ $services->firstItem() ?? 0 }}-{{ $services->lastItem() ?? 0 }} de {{ $services->total() ?? count($services) }} resultats</h5>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -84,12 +84,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="pagination mt-30">
-                                <a href="#"><i class="bx bx-chevron-left"></i></a>
-                                <a href="#" class="active">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#"><i class="bx bx-chevron-right"></i></a>
+                                {{ $services->links('vendor.pagination.custom') }}
                             </div>
                         </div>
                     </div>

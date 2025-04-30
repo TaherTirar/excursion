@@ -32,11 +32,7 @@ Route::get('/', function () {
 // Home routes
 Route::get('/home', [ServiceController::class, 'index'])->name('home');
 
-// Services routes
-Route::get('/services/excursion', [ServiceController::class, 'excursion'])->name('excursion');
-Route::get('/services/activite', [ServiceController::class, 'activity'])->name('activite');
-
-// Other routes
+// Public routes
 Route::get('/detail/{id}', [ServiceController::class, 'show'])->name('activity.show');
 Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
 Route::post('/contact/store', [ServiceController::class, 'store'])->name('store');
@@ -50,6 +46,17 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Protected routes (requires authentication)
 Route::middleware(['auth'])->group(function () {
+    // Services routes that require authentication
+    Route::get('/services/excursion', [ServiceController::class, 'excursion'])->name('excursion');
+    Route::get('/services/activite', [ServiceController::class, 'activity'])->name('activite');
+
+    // Reservation routes
+    Route::get('/reservation/{id}', [ServiceController::class, 'showReservation'])->name('reservation.show');
+    Route::post('/reservation/{id}', [ServiceController::class, 'createReservation'])->name('reservation.create');
+    Route::get('/mes-reservations', [ServiceController::class, 'myReservations'])->name('reservations.index');
+    Route::get('/reservation/{id}/edit', [ServiceController::class, 'editReservation'])->name('reservation.edit');
+    Route::put('/reservation/{id}', [ServiceController::class, 'updateReservation'])->name('reservation.update');
+    Route::delete('/reservation/{id}', [ServiceController::class, 'deleteReservation'])->name('reservation.delete');
     // Profile routes
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     Route::put('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
@@ -63,7 +70,8 @@ Route::middleware(['auth'])->group(function () {
     // Review routes
     Route::post('/excursion/{id}/review', [ServiceController::class, 'addExcursionReview'])->name('excursion.review');
     Route::post('/activity/{id}/review', [ServiceController::class, 'addActivityReview'])->name('activity.review');
-    // Add any routes that should only be accessible to logged-in users here
+
+    // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     // You can add more protected routes here as needed
 });

@@ -20,21 +20,24 @@ class ServiceController extends Controller
     }
 
     public function excursion(Request $request){
-        $services = Service::where('type','excursion')->get();
         $query = $request->input('query');
 
         if ($query) {
             $services = Service::where('type', 'excursion')
-                ->where('titre', 'like', '%'.$query.'%')
-                ->orWhere('description', 'like', '%'.$query.'%')
-                ->get();
+                ->where(function($q) use ($query) {
+                    $q->where('titre', 'like', '%'.$query.'%')
+                    ->orWhere('description', 'like', '%'.$query.'%');
+                })
+                ->paginate(6);
+        } else {
+            $services = Service::where('type','excursion')->paginate(6);
         }
 
         return view('excursion', compact('services'));
     }
 
     public function activity(Request $request){
-        $services = Service::where('type','activite')->get();
+        $services = Service::where('type','activite')->paginate(5);
 
         return view('activité', compact('services'));
     }
@@ -69,5 +72,17 @@ class ServiceController extends Controller
 
         // Ajouter un message de succès à la session
         return redirect()->back()->with('success', 'Nous avons bien reçu vos coordonnées. Nous vous contacterons dès que possible.');
+    }
+
+    // Add the myReservations method with pagination
+    public function myReservations(Request $request) {
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Use the App\Reservation model
+        $reservations = \App\Reservation::where('user_id', $user->id)
+            ->paginate(10);
+
+        return view('reservations.index', compact('reservations'));
     }
 }
