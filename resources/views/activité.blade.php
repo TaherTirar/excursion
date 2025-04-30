@@ -55,7 +55,12 @@
                                     <div class="package-info">
                                         <h5><span>${{ $service->price }}</span>/Per Person</h5>
                                         <h5><i
-                                                class="flaticon-calendar"></i>{{ $service->duree + 1 }}Jours/{{ $service->duree }}Nuitées
+                                                class="flaticon-calendar"></i>
+                                            @if(is_numeric($service->duree))
+                                                {{ $service->duree + 1 }}Jours/{{ $service->duree }}Nuitées
+                                            @else
+                                                {{ $service->duree }}
+                                            @endif
                                         </h5>
                                     </div>
                                     <h3><i class="flaticon-arrival"></i>
@@ -249,9 +254,9 @@
     <input type="radio" name="duration" id="duration5">
     <label for="duration5">5 - 6 Days</label>
     </div>
-    </div> -->
-            <!-- </div> -->
-            <!-- </div>
+    </div>
+    </div>
+    </div>
     <div class="col-lg-12 col-md-6">
     <div class="sidebar-categorie mt-40">
     <h5 class="categorie-head">Catégories</h5>

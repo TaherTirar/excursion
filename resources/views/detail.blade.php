@@ -681,7 +681,13 @@
                                                 <div class="package-info">
                                                     <div class="package-date-sm">
                                                         <strong><i
-                                                                class="flaticon-calendar"></i>{{ $item->duree + 1 }}Jours/{{ $item->duree }}Nuitées</strong>
+                                                                class="flaticon-calendar"></i>
+                                                            @if(is_numeric($item->duree))
+                                                                {{ $item->duree + 1 }}Jours/{{ $item->duree }}Nuitées
+                                                            @else
+                                                                {{ $item->duree }}
+                                                            @endif
+                                                        </strong>
                                                     </div>
                                                     <h3><i class="flaticon-arrival"></i>
                                                         <a href="package-details.html">{{ $item->titre }}</a>

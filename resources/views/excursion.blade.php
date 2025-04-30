@@ -59,8 +59,13 @@
                                     <div class="package-details">
                                         <div class="package-info">
                                             <h5><span>${{ $service->price }}</span>/Per Person</h5>
-                                            <h5><i class="flaticon-calendar"></i> {{ $service->duree + 1 }}Jour/
-                                                {{ $service->duree }}Nuitées</h5>
+                                            <h5><i class="flaticon-calendar"></i>
+                                                @if(is_numeric($service->duree))
+                                                    {{ $service->duree + 1 }}Jour/{{ $service->duree }}Nuitées
+                                                @else
+                                                    {{ $service->duree }}
+                                                @endif
+                                            </h5>
                                         </div>
                                         <h3><i class="flaticon-arrival"></i>
                                             <a

@@ -42,7 +42,7 @@ class ServiceController extends Controller
     public function show($id)
     {
         $activity = Service::findOrFail($id);
-        $activities = Service::orderBy('price')->take(5)->get();
+        $activities = Service::latest()->take(5)->get();
         return view('detail', compact('activity','activities'));
     }
 
