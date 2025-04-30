@@ -23,6 +23,123 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+    <style>
+        /* Custom styles for auth pages */
+        .auth-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #304f47;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #fff;
+            position: relative;
+            z-index: 9;
+
+            border: none;
+        }
+
+        .auth-btn:hover::before {
+            -webkit-clip-path: circle(150% at 0% 0%);
+            clip-path: circle(150% at 0% 0%);
+        }
+
+        .auth-btn::before {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            content: "";
+            background: #ff7f47;
+            top: 0;
+            left: 0;
+            border-radius: 5px;
+            -webkit-clip-path: circle(27% at -3% 50%);
+            clip-path: circle(27% at -3% 50%);
+            -webkit-transition: all 0.4s;
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .auth-link {
+            color: #FF7F47;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .auth-link:hover {
+            color: #304f47;
+        }
+
+        .user-dropdown-icon:hover .account-dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+        .account-dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+        .nav-auth-items {
+            margin-left: 5px;
+            display: inline-flex;
+            align-items: center;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .nav-auth-items a {
+            display: inline-block;
+            padding: 2px 10px;
+            background: #304f47;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #fff !important;
+            position: relative;
+            z-index: 9;
+            overflow: hidden;
+            line-height: 1;
+            margin-top: 0;
+            vertical-align: middle;
+        }
+
+        .nav-auth-items a:before {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            content: "";
+            background: #ff7f47;
+            top: 0;
+            left: 0;
+            border-radius: 5px;
+            -webkit-clip-path: circle(27% at -3% 50%);
+            clip-path: circle(27% at -3% 50%);
+            -webkit-transition: all 0.4s;
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .nav-auth-items a:hover:before {
+            -webkit-clip-path: circle(150% at 0% 0%);
+            clip-path: circle(150% at 0% 0%);
+        }
+
+        .main-nav ul li.nav-auth-items {
+            padding: 0 5px;
+        }
+        .main-nav ul li.nav-auth-items a {
+            padding: 5px 10px !important;
+            display: inline-block;
+            line-height: 1;
+            font-size: 12px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            background: #304f47;
+            color: #fff !important;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+    </style>
     @stack('styles')
 </head>
 
@@ -122,22 +239,35 @@
                                     <i class="flaticon-user"></i>
                                     <div class="account-dropdown">
                                         <ul>
-                                            <li class="account-el">
-                                                <i class="bx bx-user-pin"></i>
-                                                <a href="#">Se connecter</a>
-                                            </li>
-                                            <li class="account-el">
-                                                <i class="bx bxs-user-account"></i>
-                                                <a href="#">Mon compte</a>
-                                            </li>
-                                            <li class="account-el">
-                                                <i class="bx bx-extension"></i>
-                                                <a href="#">Paramètres</a>
-                                            </li>
-                                            <li class="account-el">
-                                                <i class="bx bx-log-in-circle"></i>
-                                                <a href="#">Se déconnecter</a>
-                                            </li>
+                                            @guest
+                                                <li class="account-el">
+                                                    <i class="bx bx-user-pin"></i>
+                                                    <a href="{{ route('login') }}">Se connecter</a>
+                                                </li>
+                                                <li class="account-el">
+                                                    <i class="bx bxs-user-account"></i>
+                                                    <a href="{{ route('register') }}">S'inscrire</a>
+                                                </li>
+                                            @else
+                                                <li class="account-el">
+                                                    <i class="bx bxs-user-account"></i>
+                                                    <a href="#">{{ Auth::user()->name }}</a>
+                                                </li>
+                                                <li class="account-el">
+                                                    <i class="bx bx-extension"></i>
+                                                    <a href="#">Paramètres</a>
+                                                </li>
+                                                <li class="account-el">
+                                                    <i class="bx bx-log-in-circle"></i>
+                                                    <a href="#"
+                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se
+                                                        déconnecter</a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                        style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                </li>
+                                            @endguest
                                         </ul>
                                     </div>
                                 </div>
@@ -171,10 +301,26 @@
                                         </li>
                                         <li><a href="{{ route('activite') }}" class="sub-item">activités</a>
                                         </li>
-                                        <!-- <li><a href="package.html" class="sub-item">Demandes Privée</a></li> -->
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('contact') }}">Contactez-nous </a></li>
+                                <li><a href="{{ route('contact') }}">Contactez-nous</a></li>
+                                @guest
+                                <li class="nav-auth-items"><a href="{{ route('login') }}">Se connecter</a></li>
+                                <li class="nav-auth-items"><a href="{{ route('register') }}">S'inscrire</a></li>
+                                @else
+                                <li class="has-child-menu">
+                                    <a href="javascript:void(0)">{{ Auth::user()->name }}</a>
+                                    <i class="fl flaticon-plus">+</i>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="sub-item">Se déconnecter</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @endguest
                             </ul>
                             <div class="navbar-icons-2">
                                 <div class="searchbar-open">
@@ -233,6 +379,24 @@
         </div>
     </header>
 
+    <!-- Flash Messages -->
+    @if (session('success') || session('error'))
+        <div class="container mt-3">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+    @endif
 
     @yield('content')
 
@@ -350,7 +514,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="copyrigth-area">
-                        <p>Copyright 2025 <a href="#">TourX</a> | Design By <a href="https://www.linkedin.com/in/tirarmohamedtaher/">24CONFIG Technologie</a></p>
+                        <p>Copyright 2025 <a href="#">TourX</a> | Design By <a
+                                href="https://www.linkedin.com/in/tirarmohamedtaher/">24CONFIG Technologie</a></p>
                     </div>
                 </div>
             </div>
