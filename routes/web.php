@@ -23,29 +23,23 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Set home as the default landing page
+Route::get('/', function () {
+    return redirect('/home');
+});
 
+// Home routes
+Route::get('/home', [ServiceController::class, 'index'])->name('home');
 
-// Route::group(['prefix' => 'admin'], function () {
-//     Voyager::routes();
-// });
+// Services routes
+Route::get('/services/excursion', [ServiceController::class, 'excursion'])->name('excursion');
+Route::get('/services/activite', [ServiceController::class, 'activity'])->name('activite');
 
-// Route::get('/home',[HomeController::class,'acceuil'])->name('acceuil');
-Route::get('/services/excursion',[HomeController::class,'excursion'])->name('excursion');
-Route::get('/services/activite',[HomeController::class,'activite'])->name('activite');
-Route::get('/detail',[HomeController::class,'detail'])->name('detail');
-Route::get('/contact',[HomeController::class,'contact'])->name('contact');
-Route::get('/info',[HomeController::class,'info'])->name('info');
-
-Route::get('/home',[ServiceController::class,'index']);
-// Route::get('/services/excursion',[ServiceController::class,'excursion'])->name('excursion2');
-Route::get('/services/activite',[ServiceController::class,'activity'])->name('activity');
-Route::get('detail/{id}', [ServiceController::class,'show'])->name('activity.show');
-Route::post('store',[ServiceController::class,'store'])->name('store');
-Route::get('contact', [ServiceController::class,'contact'])->name('contact');
-
+// Other routes
+Route::get('/detail/{id}', [ServiceController::class, 'show'])->name('activity.show');
+Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [ServiceController::class, 'store'])->name('store');
+Route::get('/info', [HomeController::class, 'info'])->name('info');
 
 // Route::get('/services/excursion',[ServiceController::class,'search']);
 

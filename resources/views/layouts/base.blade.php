@@ -55,7 +55,7 @@
     </div>
 
 
-    <div class="topbar-area">
+    <!-- <div class="topbar-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-5 tob-contact-row">
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <header>
@@ -111,7 +111,7 @@
                     <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                         <div class="navbar-wrap">
                             <div class="logo d-flex justify-content-between">
-                                <a href="index.html" class="navbar-brand"> <img
+                                <a href="{{ route('home') }}" class="navbar-brand"> <img
                                         src="{{ asset('assets/images/logo.png') }}" alt></a>
                             </div>
                             <div class="navbar-icons">
@@ -160,21 +160,21 @@
                             </div>
                             <ul>
                                 <li>
-                                    <a href="{{ url('home') }}">Acceuil</a>
+                                    <a href="{{ route('home') }}">Acceuil</a>
                                 </li>
-                                <li><a href="{{ url('info') }}">À propos de nous</a></li>
+                                <li><a href="{{ route('info') }}">À propos de nous</a></li>
                                 <li class="has-child-menu">
                                     <a href="javascript:void(0)">Nos services</a>
                                     <i class="fl flaticon-plus">+</i>
                                     <ul class="sub-menu">
-                                        <li><a href="{{ url('services/excursion') }}" class="sub-item">Excursions</a>
+                                        <li><a href="{{ route('excursion') }}" class="sub-item">Excursions</a>
                                         </li>
-                                        <li><a href="{{ url('services/activite') }}" class="sub-item">activités</a>
+                                        <li><a href="{{ route('activite') }}" class="sub-item">activités</a>
                                         </li>
                                         <!-- <li><a href="package.html" class="sub-item">Demandes Privée</a></li> -->
                                     </ul>
                                 </li>
-                                <li><a href="{{ url('contact') }}">Contactez-nous </a></li>
+                                <li><a href="{{ route('contact') }}">Contactez-nous </a></li>
                             </ul>
                             <div class="navbar-icons-2">
                                 <div class="searchbar-open">
@@ -318,11 +318,10 @@
                                 <h5 class="widget-title">support</h5>
                                 <div class="category-list">
                                     <ul>
-                                        <li><a href="{{ url('contact') }}">Contactez nous</a></li>
-                                        <li><a href="{{ url('info') }}">A propos de nous</a></li>
-                                        <li><a href="{{ url('services/excursion') }}">Excursions</a></li>
-                                        <li><a href="{{ url('services/activite') }}">Activitées</a></li>
-
+                                        <li><a href="{{ route('contact') }}">Contactez nous</a></li>
+                                        <li><a href="{{ route('info') }}">A propos de nous</a></li>
+                                        <li><a href="{{ route('excursion') }}">Excursions</a></li>
+                                        <li><a href="{{ route('activite') }}">Activités</a></li>
                                         <li><a href="#">termes et conditions</a></li>
                                     </ul>
                                 </div>
@@ -351,7 +350,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="copyrigth-area">
-                        <p>Copyright 2021 <a href="#">TourX</a> | Design By <a href="#">Egens Lab</a></p>
+                        <p>Copyright 2025 <a href="#">TourX</a> | Design By <a href="https://www.linkedin.com/in/tirarmohamedtaher/">24CONFIG Technologie</a></p>
                     </div>
                 </div>
             </div>
